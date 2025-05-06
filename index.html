@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio de Léa</title>
+    <link rel="icon" type="image/png" href="files/Moi.jpg">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Merriweather', serif;
+            background-color: #fdfdfd;
+        }
+
+        header {
+            background-image: url('files/Fleurs.png'); /* Chemin de l'image */
+    background-size: cover; /* Adapte la taille de l'image à la taille du header */
+    background-position: center; /* Centre l'image */
+    padding: 351px 80px; /* Ajoute de l'espace autour du contenu */
+    font-family: 'Merriweather', serif; /* Appliquer Merriweather uniquement au header */
+    text-align: center;
+        }
+
+        header h1 {
+            font-size: 7rem;
+            font-weight: normal; /* Texte non gras */
+            margin: 0;
+            margin-bottom: 20px;
+        }
+
+        header p {
+            font-size: 5rem;
+            color: #272727;
+            max-width: 80%; /* Limite la largeur du texte */
+            margin: 0 auto;
+           
+        }
+
+       
+
+        .presentation {
+            text-align: center;
+            margin: 50px 20px;
+        }
+
+        .presentation img {
+            width: 150px;
+            height: auto;
+        }
+
+        .presentation h2 {
+            margin-top: 20px;
+        }
+
+        .skills {
+            background-color: #f7f3f0;
+            padding: 50px 20px;
+        }
+
+        .skills h3 {
+            text-align: center;
+        }
+
+        .skills ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .skills li {
+            margin: 10px 15px;
+            padding: 10px 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .realisations {
+            padding: 50px 20px;
+        }
+
+        .realisations h3 {
+            text-align: center;
+        }
+
+        .realisations .cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .realisations .card {
+            width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: block; /* L'élément devient un lien bloc pour toute la carte */
+    text-decoration: none;
+        }
+
+        .realisations .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .realisations .card p {
+            padding: 10px;
+            background: #f7f3f0;
+            margin: 0;
+            color: #333;
+        }
+        .realisations .card:hover {
+    background-color: #f0f0f0; /* Change le fond de la carte quand on survole */
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15); /* Ajouter un effet de survol */
+}
+        .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 1.5rem;
+}
+
+
+
+.image-container img {
+    width: 100px; /* Taille de l'image */
+    cursor: pointer;
+}
+        /* Styles pour la lightbox */
+.lightbox {
+    display: none; /* Cacher la lightbox par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fond sombre pour la lightbox */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-image {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #ccc;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <script src="navbar.js"></script>
+<header>
+    
+    <h1>Le Portfolio de Léa</h1>
+    <p>Développeuse en cours de formation</p>
+    
+</header>
+
+<section class="presentation" id="presentation">
+    <img src="../portfolio/files/media.png" alt="Photo de Léa">
+    <h2>Léa Daviaud</h2>
+    <p>Prochainement diplomée d'un BTS SIO option SLAM, je recherche une alternance en développement informatique pour un BUT de 2025 à 2026.</p>
+    <p>Le BTS SIO option SLAM m'a permis d'acquérir des compétences dans trois domaines d'activité : 
+
+        <ul>  
+            <li>Support et mise à disposition de services informatiques : répondre aux attentes des utilisateurs en assurant la disponibilité des services informatiques existants ; prendre en compte les besoins informatiques dans l'entreprise et accompagner la transformation numérique des services informatiques ; gérer le patrimoine informatique, répondre aux incidents, développer la présence de l'entreprise sur le Web ; organiser son propre développement tout en s’intégrant aux équipes pour travailler en mode projet.</li>
+        
+                <li>Conception et développement d'applications : conception, développement, déploiement et maintenance des composants logiciels d'une solution applicative (Web, mobile, client…) ; conception, développement et maintenance d'une solution applicative, bases de données, gestion des données numériques, gestion de versions (Git/forme logicielle).</li>
+        
+                    <li>Cybersécurité des services informatiques : cybersécurisation d'une infrastructure réseau, d'un système ou d'un service et analyse des risques encourus par les entreprises en tenant compte des dimensions techniques, organisationnelles ou encore juridiques ; protection des données et identité numérique de l'entreprise, sécurisation des équipements et des usages. </li>
+                </ul>
+        </p>
+        <p>J'ai ainsi eu à réaliser deux stages. Le premier dans l'entreprise Teamber, afin d'automatiser des <a href="cypress.html">tests avec Cypress sur leur CRM Wandeed</a>. Le deuxième, dans l'entreprise Viktory, avait pour objectif d'automatiser la connection avec des applications externes à leur CRM Oxiva grace aux <a href="zapier.html">workfloxs générés avec Zapier</a>. </p>
+</section>
+
+<section class="skills" id="competences">
+    <h3>Mes Compétences</h3>
+    <ul>  
+        <li>Java</li>
+        <li>SQL</li>
+        <li>PHP</li>
+        <li>JavaScript / jQuery</li>
+        <li>HTML / CSS</li>
+        <li>Symfony</li>
+        <li>API</li>
+        <li>Docker</li>
+        <li>Python</li>
+        <li>Android Studio</li>
+        <li>Wordpress</li>
+        <li>Bootstrap</li>
+        <li>Cypress</li>
+        <li>Espresso</li>
+    </ul>
+    <p style="margin: 0;
+    font-weight: bold;
+    margin-right: 10px;display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 1rem;">Mon CV</p>
+    <div class="image-container">
+   
+    <img src="files/CV.png" alt="Image à agrandir" id="image-to-enlarge" style="width: 500px; cursor: pointer; margin-left: 10px;">
+</div>
+
+<!-- La lightbox pour afficher l'image en grand -->
+<div id="lightbox" class="lightbox">
+    <span id="close" class="close">&times;</span>
+    <img src="" id="lightbox-image" class="lightbox-image">
+</div>
+
+</section>
+
+<section class="realisations" id="realisations">
+    <h3>Mes Réalisations</h3>
+    <div class="cards">
+        <a href="cavalier.html" class="card">
+            <img src="files/Cavalier.png" alt="Cavalier sur échiquier">
+            <p>Cavalier sur échiquier</p>
+        </a>
+        <a href="nombre.php" class="card">
+            <img src="files/nombre.png" alt="Devine les nombres">
+            <p>Devine les nombres</p>
+        </a>
+    </div>
+</section>
+<script>
+    // Obtenir l'élément de l'image cliquable
+    const imageToEnlarge = document.getElementById('image-to-enlarge');
+    
+    // Obtenir la lightbox et l'image à l'intérieur
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    
+    // Obtenir le bouton de fermeture
+    const closeButton = document.getElementById('close');
+    
+    // Ajouter un événement de clic à l'image pour ouvrir la lightbox
+    imageToEnlarge.addEventListener('click', () => {
+        lightbox.style.display = 'flex'; // Afficher la lightbox
+        lightboxImage.src = imageToEnlarge.src; // Définir l'image à afficher en grand
+    });
+    
+    // Ajouter un événement de clic pour fermer la lightbox
+    closeButton.addEventListener('click', () => {
+        lightbox.style.display = 'none'; // Cacher la lightbox
+    });
+    </script>
+    
+</body>
+</html>

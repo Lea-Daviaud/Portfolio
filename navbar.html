@@ -1,0 +1,79 @@
+<!-- navbar.html -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="index.html" class="logo">Léa Daviaud</a>
+        <div class="navbar-links">
+            <a href="index.html">Accueil</a>
+            <a href="cavalier.html">Cavalier</a>
+            <a href="nombre.php">Nombre</a>
+        </div>
+    </div>
+</nav>
+<style>
+    /* Style global pour la navbar */
+    .navbar {
+        width: 100%;
+        background-color: #ffffff;
+        padding: 10px 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Conteneur de la navbar pour centrer son contenu */
+    .navbar-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+    }
+
+    /* Logo dans la navbar */
+    .navbar .logo {
+        color: #252525;
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    /* Liens de la navbar */
+    .navbar-links {
+        display: flex;
+        gap: 20px;
+    }
+
+    .navbar-links a {
+        color: #242424;
+        font-size: 1.1rem;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .navbar-links a:hover {
+        background-color: #d1d1d1;
+    }
+
+    /* Réduire la navbar sur mobile */
+    @media (max-width: 768px) {
+        .navbar-container {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .navbar-links {
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .navbar-links a {
+            padding: 8px 10px;
+        }
+    }
+</style>
