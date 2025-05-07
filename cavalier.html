@@ -6,7 +6,8 @@
     <title>Portfolio de Léa</title>
     <link rel="icon" href="files/Moi.jpg" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-    <style>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <style>
         /* Style global */
         body {
             font-family: 'Merriweather', serif;
@@ -14,16 +15,26 @@
             padding: 0;
             background-color: #fdfdfd;
             color: #333;
-            display: flex;
+            
             flex-direction: column;
+            justify-content: center;
             align-items: center;
+            
         }
 
-        h1, h2 {
-            font-weight: 700;
-        }
+       
 
-      
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-size: 1.2rem;
+            color: #e5e9ec;
+            margin-bottom: 2rem;
+        }
 
         /* Bannière */
         .banner {
@@ -67,6 +78,7 @@
             padding: 40px;
             max-width: 1200px;
             margin: 0 auto;
+            margin-top: 40px;
         }
 
         /* Colonne de gauche (images) */
@@ -113,6 +125,7 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
+            border-radius: 10px;
         }
 
         /* Améliorations de la structure générale */
@@ -126,10 +139,34 @@
                 width: 90%;
             }
 
-            .banner h1 {
-                font-size: 2rem;
-            }
+           
         }
+        #chessboard-container {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 40px auto;
+    max-width: 620px;
+        }
+        .code-block pre {
+    margin: 0;
+}
+        .code-block {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    color: #2C3E50;
+    margin-top: 20px;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.code-block pre {
+    margin: 0;
+}
     </style>
 </head>
 <body>
@@ -137,119 +174,212 @@
 
     <!-- Bannière -->
     <div class="banner">
-        <h1>Cavalier</h1>
+        <header class="text-center">
+            <br>
+            <h1>Cavalier sur Échiquier</h1>
+            <h2>Déplacez le cavalier et découvrez ses mouvements possibles</h2>
+            <br>
+             </header>
     </div>
 
-    <!-- Bouton de réinitialisation -->
-    <button class="btn">Réinitialiser</button>
-
-    <!-- Canvas pour l'échiquier -->
-    <canvas id="board" width="800" height="800"></canvas>
-
+    <main>
+    <div id="chessboard-container" class="p-2 bg-white">
+        <canvas id="chessboard" width="600" height="600"></canvas>
+    </div>
     <script>
-        var tableau = new Array(8);
-        var canvas = document.getElementById("board");
-        const btn = document.querySelector('.btn');
-        var ctx = canvas.getContext("2d");
+        const canvas = document.getElementById('chessboard');
+        const ctx = canvas.getContext('2d');
 
-        function initialiserTableau() {
-            var couleur = "black";
-            for (let i = 0; i < 8; i++) {
-                tableau[i] = new Array(8);
-                if (couleur == "#FFFACD") {
-                    couleur = "black";
-                } else if (couleur == "black") {
-                    couleur = "#FFFACD";
-                }
-                var y = 100 * i;
-                for (let j = 0; j < 8; j++) {
-                    var x = 100 * j;
-                    var taille = 100;
-                    if (couleur == "#FFFACD") {
-                        couleur = "black";
-                    } else if (couleur == "black") {
-                        couleur = "#FFFACD";
-                    }
-                    tableau[i][j] = uneCase(ctx, x, y, taille, couleur);
+        const boardSize = 8;
+        const squareSize = canvas.width / boardSize;
+
+        let knightPosition = { x: 1, y: 7 }; 
+        let showMoves = false;
+        let possibleMoves = [];
+
+        function drawChessboard() {
+            for (let row = 0; row < boardSize; row++) {
+                for (let col = 0; col < boardSize; col++) {
+                    const isWhite = (row + col) % 2 === 0;
+                    ctx.fillStyle = isWhite ? '#f0d9b5' : '#b58863';
+                    ctx.fillRect(col * squareSize, row * squareSize, squareSize, squareSize);
                 }
             }
         }
 
-        function uneCase(ctx, x, y, taille, couleur) {
-            ctx.beginPath();
-            ctx.rect(x, y, taille, taille);
-            ctx.fillStyle = couleur;
-            ctx.fill();
-            ctx.closePath();
+        function drawKnight() {
+            ctx.fillStyle = '#ffffff'; 
+            ctx.font = 'bold 72px serif'; 
+            ctx.fillText('♞', knightPosition.x * squareSize + squareSize / 5, knightPosition.y * squareSize + squareSize / 1.2);
+
+            ctx.strokeStyle = '#1e3a8a'; 
+            ctx.lineWidth = 3;
+            ctx.strokeText('♞', knightPosition.x * squareSize + squareSize / 5, knightPosition.y * squareSize + squareSize / 1.2);
         }
 
-        function unPoint(ctx, i, j, taille, couleur) {
-            ctx.beginPath();
-            ctx.arc(i, j, taille, 0, 2 * Math.PI);
-            ctx.fillStyle = couleur;
-            ctx.fill();
-            ctx.stroke();
+        function clearKnight() {
+            ctx.clearRect(knightPosition.x * squareSize, knightPosition.y * squareSize, squareSize, squareSize);
+            drawChessboard();
         }
 
-        function coordonnees(event) {
-            i = event.offsetX;
-            j = event.offsetY;
-
-            x = i / 100;
-            x = Math.floor(x);
-            x = x * 100 + 50;
-            y = j / 100;
-            y = Math.floor(y);
-            y = y * 100 + 50;
-            unPoint(ctx, x, y, 10, 'red');
-            rosace();
+        function moveKnight(x, y) {
+            clearKnight();
+            knightPosition.x = x;
+            knightPosition.y = y;
+            drawKnight();
+            showMoves = false;
+            possibleMoves = [];
         }
 
-        function rosace() {
-            d = x - 200; a = y - 100;
-            unPoint(ctx, d, a, 10, 'green');
-            d = x - 100; a = y - 200;
-            unPoint(ctx, d, a, 10, 'green');
-            d = x + 100; a = y - 200;
-            unPoint(ctx, d, a, 10, 'green');
-            d = x - 100; a = y + 200;
-            unPoint(ctx, d, a, 10, 'green');
-            d = x + 200; a = y - 100;
-            unPoint(ctx, d, a, 10, 'green');
-            d = x + 200; a = y + 100;
-            unPoint(ctx, d, a, 10, 'green');
-            d = x + 100; a = y + 200;
-            unPoint(ctx, d, a, 10, 'green');
-            d = x - 200; a = y + 100;
-            unPoint(ctx, d, a, 10, 'green');
+        function highlightMoves() {
+            possibleMoves = [
+                { x: 2, y: 1 }, { x: 1, y: 2 },
+                { x: -1, y: 2 }, { x: -2, y: 1 },
+                { x: -2, y: -1 }, { x: -1, y: -2 },
+                { x: 1, y: -2 }, { x: 2, y: -1 }
+            ].map(move => ({
+                x: knightPosition.x + move.x,
+                y: knightPosition.y + move.y
+            })).filter(pos =>
+                pos.x >= 0 && pos.x < boardSize && pos.y >= 0 && pos.y < boardSize
+            );
+
+            possibleMoves.forEach(pos => {
+                ctx.fillStyle = 'rgba(0, 255, 0, 0.5)';
+                ctx.fillRect(pos.x * squareSize, pos.y * squareSize, squareSize, squareSize);
+            });
         }
 
-        function effacer() {
-            ctx.clearRect(0, 0, 800, 800);
-            initialiserTableau();
-        }
+        canvas.addEventListener('click', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.floor((event.clientX - rect.left) / squareSize);
+            const y = Math.floor((event.clientY - rect.top) / squareSize);
 
-        initialiserTableau();
+            if (x === knightPosition.x && y === knightPosition.y) {
+                showMoves = !showMoves;
+                if (showMoves) {
+                    highlightMoves();
+                } else {
+                    drawChessboard();
+                    drawKnight();
+                }
+            } else if (showMoves && possibleMoves.some(pos => pos.x === x && pos.y === y)) {
+                moveKnight(x, y);
+            }
+        });
+
+        drawChessboard();
+        drawKnight();
     </script>
-    <script>board.addEventListener('click', coordonnees);</script>
-    <script>btn.addEventListener("click", effacer);</script>
 
-    <!-- Section avec images à gauche et texte à droite -->
-    <section class="content" id="description">
-        <div class="left-column">
-            <img src="files/cav1.png" alt="Image 1">
-            <img src="files/cav2.png" alt="Image 2">
+
+<section class="content" id="description">
+    <div class="left-column">
+        <div class="code-block">
+            <pre>
+                <code>
+&lt;div id="chessboard-container" class="p-2 bg-white"&gt;
+    &lt;canvas id="chessboard" width="600" height="600"&gt;&lt;/canvas&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    const canvas = document.getElementById('chessboard');
+    const ctx = canvas.getContext('2d');
+
+    const boardSize = 8;
+    const squareSize = canvas.width / boardSize;
+
+    let knightPosition = { x: 1, y: 7 };
+    let showMoves = false;
+    let possibleMoves = [];
+
+    function drawChessboard() {
+        for (let row = 0; row < boardSize; row++) {
+            for (let col = 0; col < boardSize; col++) {
+                const isWhite = (row + col) % 2 === 0;
+                ctx.fillStyle = isWhite ? '#f0d9b5' : '#b58863';
+                ctx.fillRect(col * squareSize, row * squareSize, squareSize, squareSize);
+            }
+        }
+    }
+
+    function drawKnight() {
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 72px serif';
+        ctx.fillText('♞', knightPosition.x * squareSize + squareSize / 5, knightPosition.y * squareSize + squareSize / 1.2);
+
+        ctx.strokeStyle = '#1e3a8a';
+        ctx.lineWidth = 3;
+        ctx.strokeText('♞', knightPosition.x * squareSize + squareSize / 5, knightPosition.y * squareSize + squareSize / 1.2);
+    }
+
+    function clearKnight() {
+        ctx.clearRect(knightPosition.x * squareSize, knightPosition.y * squareSize, squareSize, squareSize);
+        drawChessboard();
+    }
+
+    function moveKnight(x, y) {
+        clearKnight();
+        knightPosition.x = x;
+        knightPosition.y = y;
+        drawKnight();
+        showMoves = false;
+        possibleMoves = [];
+    }
+
+    function highlightMoves() {
+        possibleMoves = [
+            { x: 2, y: 1 }, { x: 1, y: 2 },
+            { x: -1, y: 2 }, { x: -2, y: 1 },
+            { x: -2, y: -1 }, { x: -1, y: -2 },
+            { x: 1, y: -2 }, { x: 2, y: -1 }
+        ].map(move => ({
+            x: knightPosition.x + move.x,
+            y: knightPosition.y + move.y
+        })).filter(pos =>
+            pos.x >= 0 && pos.x < boardSize && pos.y >= 0 && pos.y < boardSize
+        );
+
+        possibleMoves.forEach(pos => {
+            ctx.fillStyle = 'rgba(0, 255, 0, 0.5)';
+            ctx.fillRect(pos.x * squareSize, pos.y * squareSize, squareSize, squareSize);
+        });
+    }
+
+    canvas.addEventListener('click', (event) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = Math.floor((event.clientX - rect.left) / squareSize);
+        const y = Math.floor((event.clientY - rect.top) / squareSize);
+
+        if (x === knightPosition.x && y === knightPosition.y) {
+            showMoves = !showMoves;
+            if (showMoves) {
+                highlightMoves();
+            } else {
+                drawChessboard();
+                drawKnight();
+            }
+        } else if (showMoves && possibleMoves.some(pos => pos.x === x && pos.y === y)) {
+            moveKnight(x, y);
+        }
+    });
+
+    drawChessboard();
+    drawKnight();
+&lt;/script&gt;
+                </code>
+            </pre>
         </div>
+    </div>
         <div class="right-column">
+            <br>
+            <h2>Lien github : </h2>
+            <p><a href="https://github.com/Lea-Daviaud/Cavalier.git">https://github.com/Lea-Daviaud/Cavalier.git</a></p>
+            <br>
             <h2>Description du projet "Cavalier"</h2>
-            <p>
-                Cliquer sur l'échiquier permet de placer un point rouge représentant le cavalier avec chacun de ses déplacements possibles représentés par des points verts.
-            </p>
-            <p>
-                Pour cela, je réalise un premier code en html, très simple. Puis un code JavaScript où des fonctions créent les points.
-            </p>
+            <p>Ce projet développé en HTML, CSS et JavaScript, représente un échiquier. L’utilisateur peut cliquer sur le cavalier pour afficher ses mouvements possibles et le déplacer.</p>
+            <p>Cela m'a permis de manipuler le DOM et les événements en JavaScript, de faire des calculs algorithmiques des mouvements du cavalier, utiliser l'élément <\canvas> et de faire une mise en page responsive avec Bootstrap et CSS. </canva></p>
         </div>
     </section>
-
+</main>
 </body>
 </html>
