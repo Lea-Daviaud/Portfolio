@@ -120,14 +120,14 @@
 
         /* Style du canvas */
         canvas {
-            border: 2px solid #333;
+            border: 2px solid #ececec;
             margin-top: 40px;
             display: block;
             margin-left: auto;
             margin-right: auto;
             border-radius: 10px;
         }
-
+        .logo{color: #000000;}
         /* Améliorations de la structure générale */
         @media (max-width: 768px) {
             .content {
@@ -209,7 +209,7 @@
 
         function drawKnight() {
             ctx.fillStyle = '#ffffff'; 
-            ctx.font = 'bold 72px serif'; 
+            ctx.font = ' 72px serif'; 
             ctx.fillText('♞', knightPosition.x * squareSize + squareSize / 5, knightPosition.y * squareSize + squareSize / 1.2);
 
             ctx.strokeStyle = '#000000'; 
