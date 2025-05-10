@@ -1,11 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Portfolio</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+     <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      padding-top: 50px;
+    }
+    .logo{color: #b9b9b9;}
+    h1, h2 {
+      color: #000000;
+    }
+    header {
+      background-color: #ccc;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .screenshot {
+      max-width: 100%;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+    .capture-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+      .screenshot {
+            margin: 10px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            text-align: center;
+        }
+        .screenshot img {
+            max-width: 100%;
+            height: auto;
+        }
+  </style>
 </head>
 <body>
-    
+    <script src="navbar.js"></script>
+     <header>
+    <h1><br>Projet Grad - Site vitrine</h1>
+    <p><a href="https://github.com/Lea-Daviaud/Grad.git">Lien GitHub : https://github.com/Lea-Daviaud/Grad.git</a></p>
+  </header>
+
+  <main class="container mt-4">
+    <section>
+      <h2>Présentation du projet</h2>
+      <p>
+        Dans le cadre de mon BTS SIO option SLAM, j’ai participé à la réalisation d’un site web vitrine dédié à l’aménagement extérieur en bois. Le but était de mettre en avant les produits et les services de l'entreprise à travers un site web.       </p>
+   <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 103944.png" alt="Capture d'écran 1">
+                </div>
+    </section>
+
+    <section>
+      <h2><br>Organisation du projet</h2>
+      <p>
+        Le projet a été mené en mode projet avec un binôme de développeurs. Nous avions une note de cadrage avec le wireframe prédéfini. Pour ce premier projet de groupe, l'organisation était assez informelle : nous n'avions pas de planning, ni de schémas de base de données ou d'architecture et nous échangions oralement au début de chaque séance pour répartir les tâches du jour.
+      </p>
+         <div class="col-md-4 screenshot">
+                    <img src="files/Grad/wireframe.png" alt="Capture d'écran 1">
+                </div>
+                <div class="col-md-4 screenshot">
+                    <img src="files/Grad/bdd.png" alt="Capture d'écran 1">
+                </div>
+    </section>
+
+    <section>
+      <h2><br>Technologies et techniques utilisées</h2>
+      <ul>
+        <li><strong>PHP</strong> pour le traitement des formulaires, la logique serveur et la gestion des sessions (<code>session_start()</code>).</li>
+        <li><strong>PDO</strong> pour les connexions sécurisées à la base de données <strong>MySQL</strong>, avec prévention des <strong>injections SQL</strong>.</li>
+        <li>Utilisation de <strong>sha256</strong> pour le hachage des mots de passe.</li>
+        <li>Intégration d’une <strong>navbar</strong> fixe et d’un <strong>footer</strong> sur chaque page.</li>
+        <li>Ajout de <strong>modals</strong> pour visualiser les images du site.</li>
+        <li><strong>CSS</strong> et <strong>Bootstrap</strong> pour être responsive.</li>
+        <li>Création de <strong>formulaires</strong> pour la collecte d’informations avec traitement sécurisé côté serveur.</li>
+      </ul>
+       <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 104439.png" alt="Capture d'écran 10">
+                </div>
+                <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 104406.png" alt="Capture d'écran 8">
+                </div>
+                <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 104302.png" alt="Capture d'écran 5">
+                </div>
+                 
+                <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 104427.png" alt="Capture d'écran 9">
+                </div>
+               
+                <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 104528.png" alt="Capture d'écran 11">
+                </div>
+                <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 104544.png" alt="Capture d'écran 12">
+                </div>
+                <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 104604.png" alt="Capture d'écran 13">
+                </div>
+    </section>
+
+    <section>
+      <h2>Amélioration de la compétence professionnelle</h2>
+      <p>
+        Ce projet m’a permis d’approfondir la compétence suivante du référentiel BTS SIO SLAM :
+        <strong>“Développer la présence en ligne de l’organisation”</strong>.
+      </p>
+      <p>En effet, grâce à la mise en place d’un site vitrine complet, j’ai appris à :</p>
+      <ul>
+        <li>Structurer un site web autour des besoins d’un client.</li>
+        <li>Construire un site web avec une utilisation intuitive.</li>
+        <li>Utiliser des pratiques de développement sécurisées.</li>
+      </ul>
+   
+          
+                
+                <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 104003.png" alt="Capture d'écran 2">
+                </div>
+                 <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 104337.png" alt="Capture d'écran 7">
+                </div>
+                <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 104237.png" alt="Capture d'écran 3">
+                </div>
+                <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 104249.png" alt="Capture d'écran 4">
+                </div>
+                
+                <div class="col-md-4 screenshot">
+                    <img src="files/Grad/Capture d'écran 2025-05-10 104319.png" alt="Capture d'écran 6">
+                </div>
+               
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
